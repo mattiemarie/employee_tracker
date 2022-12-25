@@ -102,9 +102,29 @@ function updateEmployeeRole()
 ////////////////////////////////////////
 
 // Add Role CHOICE
-function addRole()
-//////////////////////////////////////
-
+function addRole() {
+    inquirer
+          .prompt([
+            {
+                type: 'input',
+                name: 'roleName',
+                message: "What is the Name of the Role?",
+             },
+             {
+                type: 'input',
+                name: 'roleSalary',
+                message: "What is the Salary of the Role?",
+             },
+             {
+                type: 'list',
+                name: 'employeeRole',
+                message: "Which Department does the Role belong to?",
+                choices:['Engineering', 'Finance', 'Legal', 'Sale'],
+             }
+        ]).then (function(data) {
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+        });
+};
 
 // View All Departments CHOICE
 function viewAllDepartments() {
