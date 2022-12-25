@@ -70,39 +70,41 @@ function addEmployee() {
     inquirer
         .prompt([
             {
+                type: 'input',
+                name: 'employeeFirstName',
+                message: "What is the Employee's First Name?",
+             },
+             {
+                type: 'input',
+                name: 'employeeLastName',
+                message: "What is the Employee's Last Name?",
+             },
+             {
                 type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+                name: 'employeeRole',
+                message: "What is the Employee's Role?",
+                choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
+             },
+             {
+                type: 'list',
+                name: 'employeeManager',
+                message: "Who is the Employee's Manager?",
+                choices:['Lydia Night', 'Chris Nunez', 'Adam Abilgaard', 'Cole Preston', 'None'],
              }
-        ]);
+
+        ]).then (function(data) {
+/////////////////////////////////////////////////////////////////////////////////////////
+        });
 };
 
 // Update Employee Role CHOICE
-function updateEmployeeRole() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
-             }
-        ]);
-};
+function updateEmployeeRole()
+////////////////////////////////////////
 
 // Add Role CHOICE
-function addRole() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
-             }
-        ]);
-};
+function addRole()
+//////////////////////////////////////
+
 
 // View All Departments CHOICE
 function viewAllDepartments() {
@@ -117,10 +119,29 @@ function addDepartment() {
     inquirer
         .prompt([
             {
+                type: 'input',
+                name: 'employeeFirstName',
+                message: "What is the Employee's First Name?",
+             },
+             {
+                type: 'input',
+                name: 'employeeLastName',
+                message: "What is the Employee's Last Name?",
+             },
+             {
                 type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+                name: 'employeeRole',
+                message: "What is the Employee's Role?",
+                choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
+             },
+             {
+                type: 'list',
+                name: 'employeeManager',
+                message: "Who is the Employee's Manager?",
+                choices:['Lydia Night', 'Chris Nunez', 'Adam Abilgaard', 'Cole Preston', 'None'],
              }
-        ]);
+
+        ]).then (function(data) {
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+        });
 };
