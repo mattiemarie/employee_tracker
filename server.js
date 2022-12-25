@@ -59,15 +59,10 @@ function mainChoice() {
 
 // View all Employees CHOICE
 function viewAllEmployees() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
-             }
-        ]);
+db.query('SELECT * FROM employee', function (err, results)
+{
+    console.log(results);
+});
 };
 
 // Add Employee CHOICE
@@ -111,15 +106,10 @@ function addRole() {
 
 // View All Departments CHOICE
 function viewAllDepartments() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'mainChoice',
-                message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
-             }
-        ]);
+db.query('SELECT * FROM department', function (err, results)
+{
+    console.log(results);
+});
 };
 
 // Add Department CHOICE
