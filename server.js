@@ -56,3 +56,81 @@ function mainChoice() {
             };
         });
 };
+
+// View all Employees CHOICE
+function viewAllEmployees() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
+
+// Add Employee CHOICE
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
+
+// Update Employee Role CHOICE
+function updateEmployeeRole() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
+
+// Add Role CHOICE
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
+
+// View All Departments CHOICE
+function viewAllDepartments() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
+
+// Add Department CHOICE
+function addDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'mainChoice',
+                message: 'What would you like to do?',
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+             }
+        ]);
+};
