@@ -124,8 +124,31 @@ function addEmployee() {
 };
 
 // Update Employee Role CHOICE
-function updateEmployeeRole()
-////////////////////////////////////////
+function updateEmployeeRole() {
+db.query('SELECT * FROM employee',
+    function (err, results) {
+    if(err) throw err;
+    inquirer
+        .promopt ([
+            {
+                type: 'list',
+                name: 'employeeChoice',
+                choices: function() {
+                    let employeeChoice = [];
+                    for(i=0; i < results.length; i++)
+                    {
+                        employeeChoice.push(results[i].last_name);
+                    }
+                    return employeeChoice;
+                },
+                message: 'Which Employee would you like to update?'
+            }
+        ])
+            
+    mainChoice();
+}); 
+}
+
 
 // Add Role CHOICE
 function addRole() {
