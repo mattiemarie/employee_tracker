@@ -140,7 +140,9 @@ function addRole() {
 function viewAllDepartments() {
 db.query('SELECT * FROM department', function (err, results)
 {
-    console.log(results);
+    if(err) throw err;
+    console.table(results);
+    mainChoice();
 });
 };
 
