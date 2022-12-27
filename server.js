@@ -96,14 +96,30 @@ function addEmployee() {
                 choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
              },
              {
-                type: 'list',
+                type: 'number',
                 name: 'employeeManager',
-                message: "Who is the Employee's Manager?",
-                choices:['Lydia Night', 'Chris Nunez', 'Adam Abilgaard', 'Cole Preston', 'None'],
+                validate: function(value) {
+                    if(isNaN(value) === false){
+                        return true;
+                    }
+                    return false;
+                },
+                message: "What is the Manager ID Number?",
+                default: "1",
              }
 
         ]).then (function(data) {
-/////////////////////////////////////////////////////////////////////////////////////////
+            db.query(
+                "INSERT INTO employee SET ?",
+                {
+                    first_name: data.employeeFirstName,
+                    last_name: data.employeeLastName,
+                    role_id: data.employeeRole,
+                    manager_id: data.employeeManager
+                },
+            )
+            console.log('Employee Added Successfulley');
+            mainChoice();
         });
 };
 
