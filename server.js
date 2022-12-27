@@ -140,26 +140,9 @@ function addDepartment() {
         .prompt([
             {
                 type: 'input',
-                name: 'employeeFirstName',
-                message: "What is the Employee's First Name?",
+                name: 'departmentName',
+                message: "What is the name of the Department?",
              },
-             {
-                type: 'input',
-                name: 'employeeLastName',
-                message: "What is the Employee's Last Name?",
-             },
-             {
-                type: 'list',
-                name: 'employeeRole',
-                message: "What is the Employee's Role?",
-                choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
-             },
-             {
-                type: 'list',
-                name: 'employeeManager',
-                message: "Who is the Employee's Manager?",
-                choices:['Lydia Night', 'Chris Nunez', 'Adam Abilgaard', 'Cole Preston', 'None'],
-             }
 
         ]).then (function(data) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
