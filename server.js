@@ -127,12 +127,24 @@ function addRole() {
              },
              {
                 type: 'list',
-                name: 'employeeRole',
+                name: 'department',
                 message: "Which Department does the Role belong to?",
                 choices:['Engineering', 'Finance', 'Legal', 'Sale'],
              }
         ]).then (function(data) {
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+            db.query(
+                "INSERT INTO role SET ?",
+                {
+                    title: data.roleName,
+                    salary: data.roleSalary,
+                    department_id: data.department
+                },
+                function(err) {
+                    if (err) throw err;
+                    console.log('Employee Roles updated');
+                    mainChoice();
+                }
+            )
         });
 };
 
