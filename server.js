@@ -157,6 +157,14 @@ function addDepartment() {
              },
 
         ]).then (function(data) {
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+            db.query (
+                "INSERT INTO department VALUES (DEFAULT, ?)",
+                [data.department],
+                function(err) {
+                    if(err) throw err;
+                    console.log('Departments Updated')
+                    mainChoice();
+                }
+            )
         });
 };
