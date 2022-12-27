@@ -1,6 +1,6 @@
-const express = require('express');
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+const conTab = require('console.table');
 
 const PORT = process.env.PORT || 3001
 const app = express();
@@ -69,7 +69,9 @@ function mainChoice() {
 function viewAllEmployees() {
 db.query('SELECT * FROM employee', function (err, results)
 {
-    console.log(results);
+    if(err) throw err;
+    console.table(results);
+    mainChoice();
 });
 };
 
