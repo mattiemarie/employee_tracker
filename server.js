@@ -144,8 +144,53 @@ db.query('SELECT * FROM employee',
                 message: 'Which Employee would you like to update?'
             }
         ])
+        .then(function(data){
+            const employeeName = data.choice;
             
-    mainChoice();
+            db.query("SELECT * FROM employee",
+            function(err, results) {
+                if(err) throw err;
+            inquirer
+                .prompt ([
+                    {
+                        type: 'list',
+                        name: updatedRole,
+                        choices: function() {
+                            let updatedRole = [];
+                            for(i=0; i < results.length; i++)
+                            {
+                                updatedRole.push(results[i].role_id);
+                            }
+                            return updatedRole;
+                        },
+                        message: "What is the Employee's new Role?"
+                    },
+                    {
+                        type: 'number',
+                        name: 'updatedManager',
+                        validate: function(value) {
+                            if(isNaN(value) === false){
+                                return true;
+                            }
+                            return false;
+                        },
+                        message: "What is the Manager ID Number?",
+                        default: "1",
+                     }
+                ]).then(function(data){
+                    db.query('UPDATE employee SET ? WHERE last_name = ?',
+                        [
+                            {
+                                role_id: data.updatedRole,
+                                manager_id: data.updatedManager
+                            },
+                        ],
+                    ),
+                    console.log('Employee Role has been Updated');
+                    mainChoice();
+                });
+            })
+        }) 
 }); 
 }
 
