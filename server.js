@@ -1,13 +1,5 @@
 const inquirer = require('inquirer');
-const mysql = require('mysql2');
-const conTab = require('console.table');
-
-const PORT = process.env.PORT || 3001
-const app = express();
-
-// Express Middleware
-app.use(express.urlencoded({ extended:false }));
-app.use(express.json());
+var mysql = require("mysql2");
 
 // Connect info for mySQL database
 const db = mysql.createConnection (
@@ -129,7 +121,7 @@ db.query('SELECT * FROM employee',
     function (err, results) {
     if(err) throw err;
     inquirer
-        .promopt ([
+        .prompt ([
             {
                 type: 'list',
                 name: 'employeeChoice',
@@ -154,7 +146,7 @@ db.query('SELECT * FROM employee',
                 .prompt ([
                     {
                         type: 'list',
-                        name: updatedRole,
+                        name: 'updatedRole',
                         choices: function() {
                             let updatedRole = [];
                             for(i=0; i < results.length; i++)
@@ -234,14 +226,15 @@ function addRole() {
 
 // View All Departments CHOICE
 function viewAllDepartments() {
-db.query('SELECT * FROM department', function (err, results)
-{
-    if(err) throw err;
-    console.table(results);
-    mainChoice();
-});
-};
+    db.query('SELECT * FROM department', function (err, results)
+    {
+        if(err) throw err;
+        console.table(results);
+        mainChoice();
+    });
+    };
 
+    
 // Add Department CHOICE
 function addDepartment() {
     inquirer
