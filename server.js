@@ -9,7 +9,7 @@ const app = express();
 app.use(express.urlencoded({ extended:false }));
 app.use(express.json());
 
-// Connect to Database
+// Connect info for mySQL database
 const db = mysql.createConnection (
     {
         host: 'localhost',
@@ -21,7 +21,15 @@ const db = mysql.createConnection (
 
 );
 
-mainChoice();
+// Connecting to mySQL server/database
+db.connect(function(err) {
+    if(err) throw err;
+    console.log('SQL is connected');
+
+   // Main Choice will begin
+   mainChoice(); 
+});
+
 
 // Main Choice for Employee Database
 function mainChoice() {
