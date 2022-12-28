@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 var mysql = require("mysql2");
 
 // Connect info for mySQL database
@@ -31,7 +32,7 @@ function mainChoice() {
                 type: 'list',
                 name: 'mainChoice',
                 message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'Add Role', 'View All Departments', 'Add Department'],
              }
         ]).then (function(data) {
             switch(data.mainChoice) {
@@ -121,59 +122,59 @@ function addEmployee() {
 
 // Update Employee Role CHOICE ////////////////////////////////////////////////////////
 function updateEmployeeRole() {
-db.query('SELECT * FROM employee',
-    function (err, results) {
-    if(err) throw err;
-    inquirer
-        .prompt ([
-            {
-                type: 'list',
-                name: 'employeeChoice',
-                choices: function() {
-                    let employeeChoice = [];
-                    for(i=0; i < results.length; i++)
-                    {
-                        employeeChoice.push(results[i].last_name);
-                    }
-                    return employeeChoice;
-                },
-                message: 'Which Employee would you like to update?'
-            }
-        ])
-        .then(function(data){
-            const employeeName = data.choice;
-            
-            db.query("SELECT * FROM employee",
-            function(err, results) {
-                if(err) throw err;
-            inquirer
-                .prompt ([
-                    {
-                        type: 'list',
-                        name: 'updatedRole',
-                        choices: function() {
-                            let updatedRole = [];
-                            for(i=0; i < results.length; i++)
-                            {
-                                updatedRole.push(results[i].role_id);
-                            }
-                            return updatedRole;
-                        },
-                        message: "What is the Employee's new Role?"
+    db.query('SELECT * FROM employee',
+        function (err, results) {
+        if(err) throw err;
+        inquirer
+            .prompt ([
+                {
+                    type: 'list',
+                    name: 'employeeChoice',
+                    choices: function() {
+                        let employeeChoice = [];
+                        for(i=0; i < results.length; i++)
+                        {
+                            employeeChoice.push(results[i].last_name);
+                        }
+                        return employeeChoice;
                     },
-                    {
-                        type: 'number',
-                        name: 'updatedManager',
-                        validate: function(value) {
-                            if(isNaN(value) === false){
-                                return true;
-                            }
-                            return false;
+                    message: 'Which Employee would you like to update?'
+                }
+            ])
+            .then(function(data){
+                const employeeName = data.choice;
+            
+                db.query("SELECT * FROM employee",
+                function(err, results) {
+                    if(err) throw err;
+             inquirer
+                    .prompt ([
+                        {
+                            type: 'list',
+                            name: 'updatedRole',
+                            choices: function() {
+                                let updatedRole = [];
+                                for(i=0; i < results.length; i++)
+                                {
+                                    updatedRole.push(results[i].role_id);
+                                }
+                                return updatedRole;
+                            },
+                            message: "What is the Employee's new Role?"
                         },
-                        message: "What is the Manager ID Number?",
-                        default: "1",
-                     }
-                ]).then(function(data){
+                        {
+                            type: 'number',
+                            name: 'updatedManager',
+                            validate: function(value) {
+                                if(isNaN(value) === false){
+                                    return true;
+                                }
+                                return false;
+                            },
+                            message: "What is the Manager ID Number?",
+                            default: "1",
+                        }
+                    ]).then(function(data){
                     db.query('UPDATE employee SET ? WHERE last_name = ?',
                         [
                             {
@@ -184,10 +185,10 @@ db.query('SELECT * FROM employee',
                     ),
                     console.log('Employee Role has been Updated');
                     mainChoice();
-                });
-            })
-        }) 
-}); 
+                    });
+                })
+            }) 
+    }); 
 }
 
 
