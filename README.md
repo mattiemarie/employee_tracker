@@ -68,4 +68,4 @@ The following is a link to an uploaded demo of the Challenge 12 SQL: Employee Tr
 
 ## Description
 
-The goal of Challenge 12 was to create...
+The goal of Challenge 12 was to create an Employee Tacker so that the user can 'View All Employees', 'Add Employee', 'Update Employee Role', 'Add Role', 'View All Departments', and 'Add Department'. Thus allowing for a editable table of an employee database.
