@@ -59,63 +59,67 @@ function mainChoice() {
 
 // View all Employees CHOICE
 function viewAllEmployees() {
-db.query('SELECT * FROM employee', function (err, results)
-{
-    if(err) throw err;
-    console.table(results);
-    mainChoice();
-});
+    db.query('SELECT * FROM employee', function (err, results)
+    {
+        if(err) throw err;
+        console.table(results);
+        mainChoice();
+    });
 };
 
 // Add Employee CHOICE
 function addEmployee() {
-    inquirer
-        .prompt([
-            {
-                type: 'input',
-                name: 'employeeFirstName',
-                message: "What is the Employee's First Name?",
-             },
-             {
-                type: 'input',
-                name: 'employeeLastName',
-                message: "What is the Employee's Last Name?",
-             },
-             {
-                type: 'list',
-                name: 'employeeRole',
-                message: "What is the Employee's Role?",
-                choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
-             },
-             {
-                type: 'number',
-                name: 'employeeManager',
-                validate: function(value) {
-                    if(isNaN(value) === false){
-                        return true;
-                    }
-                    return false;
+    db.query("SELECT * FROM role", function(err, results){
+        if(err) throw err;
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'employeeFirstName',
+                    message: "What is the Employee's First Name?",
                 },
+                {
+                    type: 'input',
+                    name: 'employeeLastName',
+                    message: "What is the Employee's Last Name?",
+                },
+                {
+                    type: 'list',
+                    name: 'employeeRole',
+                    message: "What is the Employee's Role?",
+                    choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
+                },
+                {
+                    type: 'number',
+                    name: 'employeeManager',
+                    validate: function(value) {
+                        if(isNaN(value) === false){
+                        return true;
+                        }
+                        return false;
+                    },
                 message: "What is the Manager ID Number?",
                 default: "1",
-             }
+                }
 
-        ]).then (function(data) {
-            db.query(
-                "INSERT INTO employee SET ?",
-                {
-                    first_name: data.employeeFirstName,
-                    last_name: data.employeeLastName,
-                    role_id: data.employeeRole,
-                    manager_id: data.employeeManager
-                },
-            )
-            console.log('Employee Added Successfulley');
-            mainChoice();
-        });
+            ]).then (function(data) {
+                db.query(
+                    "INSERT INTO employee SET ?",
+                    {
+                        first_name: data.employeeFirstName,
+                        last_name: data.employeeLastName,
+                        role_id: data.employeeRole,
+                        manager_id: data.employeeManager
+                    },
+                )
+                console.log('Employee Added Successfulley');
+                mainChoice();
+            });
+    });
+
 };
 
-// Update Employee Role CHOICE
+// Update Employee Role CHOICE ////////////////////////////////////////////////////////
 function updateEmployeeRole() {
 db.query('SELECT * FROM employee',
     function (err, results) {
@@ -187,7 +191,7 @@ db.query('SELECT * FROM employee',
 }
 
 
-// Add Role CHOICE
+// Add Role CHOICE//////////////////////////////////////////////////////////
 function addRole() {
     inquirer
           .prompt([
@@ -235,7 +239,7 @@ function viewAllDepartments() {
     };
 
     
-// Add Department CHOICE
+// Add Department CHOICE//////////////////////////////////////////
 function addDepartment() {
     inquirer
         .prompt([
