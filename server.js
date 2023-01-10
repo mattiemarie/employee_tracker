@@ -64,7 +64,7 @@ function viewAllEmployees() {
     {
         if(err) throw err;
         console.table(results);
-        mainChoice();
+        mainChoice(); 
     });
 };
 
@@ -99,8 +99,7 @@ function addEmployee() {
                         }
                         return false;
                     },
-                message: "What is the Manager ID Number?",
-                default: "1",
+                    message: "What is the Manager ID Number?",
                 }
 
             ]).then (function(data) {
@@ -113,14 +112,16 @@ function addEmployee() {
                         manager_id: data.employeeManager
                     },
                 )
-                console.log('Employee Added Successfulley');
-                mainChoice();
-            });
-    });
+                
+                console.log('Employee Added Successfully');
 
+                mainChoice(); 
+            });
+            
+    });
 };
 
-// Update Employee Role CHOICE ////////////////////////////////////////////////////////
+// Update Employee Role CHOICE
 function updateEmployeeRole() {
     db.query('SELECT * FROM employee',
         function (err, results) {
@@ -131,34 +132,34 @@ function updateEmployeeRole() {
                     type: 'list',
                     name: 'employeeChoice',
                     choices: function() {
-                        let employeeChoice = [];
+                        let employeeChoiceArr = [];
                         for(i=0; i < results.length; i++)
                         {
-                            employeeChoice.push(results[i].last_name);
+                            employeeChoiceArr.push(results[i].last_name);
                         }
-                        return employeeChoice;
+                        return employeeChoiceArr;
                     },
                     message: 'Which Employee would you like to update?'
                 }
             ])
             .then(function(data){
-                const employeeName = data.choice;
+                const employeeName = data.employeeChoice;
             
                 db.query("SELECT * FROM employee",
                 function(err, results) {
                     if(err) throw err;
-             inquirer
+                inquirer
                     .prompt ([
                         {
                             type: 'list',
                             name: 'updatedRole',
                             choices: function() {
-                                let updatedRole = [];
+                                let employeeChoiceArr = [];
                                 for(i=0; i < results.length; i++)
                                 {
-                                    updatedRole.push(results[i].role_id);
+                                    employeeChoiceArr.push(results[i].role_id);
                                 }
-                                return updatedRole;
+                                return employeeChoiceArr;
                             },
                             message: "What is the Employee's new Role?"
                         },
@@ -172,7 +173,6 @@ function updateEmployeeRole() {
                                 return false;
                             },
                             message: "What is the Manager ID Number?",
-                            default: "1",
                         }
                     ]).then(function(data){
                     db.query('UPDATE employee SET ? WHERE last_name = ?',
@@ -180,11 +180,12 @@ function updateEmployeeRole() {
                             {
                                 role_id: data.updatedRole,
                                 manager_id: data.updatedManager
-                            },
+                            }, employeeName
                         ],
                     ),
                     console.log('Employee Role has been Updated');
-                    mainChoice();
+
+                    mainChoice(); 
                     });
                 })
             }) 
@@ -192,27 +193,28 @@ function updateEmployeeRole() {
 }
 
 
-// Add Role CHOICE//////////////////////////////////////////////////////////
+// Add Role CHOICE
 function addRole() {
     inquirer
           .prompt([
-            {
-                type: 'input',
-                name: 'roleName',
-                message: "What is the Name of the Role?",
-             },
-             {
-                type: 'input',
-                name: 'roleSalary',
-                message: "What is the Salary of the Role?",
-             },
-             {
-                type: 'list',
-                name: 'department',
-                message: "Which Department does the Role belong to?",
-                choices:['Engineering', 'Finance', 'Legal', 'Sale'],
-             }
-        ]).then (function(data) {
+                {
+                    type: 'input',
+                    name: 'roleName',
+                    message: "What is the Name of the Role?",
+                },
+                {
+                    type: 'input',
+                    name: 'roleSalary',
+                    message: "What is the Salary of the Role?",
+                },
+                {
+                    type: 'list',
+                    name: 'department',
+                    message: "Which Department does the Role belong to?",
+                    choices:['Engineering', 'Finance', 'Legal', 'Sale'],
+                }
+
+            ]).then (function(data) {
             db.query(
                 "INSERT INTO role SET ?",
                 {
@@ -221,9 +223,9 @@ function addRole() {
                     department_id: data.department
                 },
                 function(err) {
-                    if (err) throw err;
+                    if(err) throw err;
                     console.log('Employee Roles updated');
-                    mainChoice();
+                    mainChoice(); 
                 }
             )
         });
@@ -235,12 +237,13 @@ function viewAllDepartments() {
     {
         if(err) throw err;
         console.table(results);
-        mainChoice();
+        
+        mainChoice(); 
     });
     };
 
     
-// Add Department CHOICE//////////////////////////////////////////
+// Add Department CHOICE
 function addDepartment() {
     inquirer
         .prompt([
@@ -257,7 +260,7 @@ function addDepartment() {
                 function(err) {
                     if(err) throw err;
                     console.log('Departments Updated')
-                    mainChoice();
+                    mainChoice(); 
                 }
             )
         });
