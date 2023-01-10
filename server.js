@@ -114,7 +114,6 @@ function addEmployee() {
                 )
                 
                 console.log('Employee Added Successfully');
-
                 mainChoice(); 
             });
             
@@ -259,7 +258,7 @@ function addDepartment() {
                 [data.department],
                 function(err) {
                     if(err) throw err;
-                    console.log('Departments Updated')
+                    console.log('Departments Updated');
                     mainChoice(); 
                 }
             )
