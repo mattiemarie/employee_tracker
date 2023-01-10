@@ -85,10 +85,9 @@ function addEmployee() {
                     message: "What is the Employee's Last Name?",
                 },
                 {
-                    type: 'list',
+                    type: 'number',
                     name: 'employeeRole',
-                    message: "What is the Employee's Role?",
-                    choices:['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager','Accountant', 'Legal Team Lead', 'Lawyer'],
+                    message: "What is the Employee's Role ID?"
                 },
                 {
                     type: 'number',
@@ -207,10 +206,9 @@ function addRole() {
                     message: "What is the Salary of the Role?",
                 },
                 {
-                    type: 'list',
+                    type: 'number',
                     name: 'department',
-                    message: "Which Department does the Role belong to?",
-                    choices:['Engineering', 'Finance', 'Legal', 'Sale'],
+                    message: "Which Department ID does the Role belong to?",
                 }
 
             ]).then (function(data) {
@@ -254,8 +252,10 @@ function addDepartment() {
 
         ]).then (function(data) {
             db.query (
-                "INSERT INTO department VALUES (DEFAULT, ?)",
-                [data.department],
+                "INSERT INTO department set ?",
+                {
+                    department_name: data.departmentName
+                },
                 function(err) {
                     if(err) throw err;
                     console.log('Departments Updated');
