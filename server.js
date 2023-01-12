@@ -32,7 +32,7 @@ function mainChoice() {
                 type: 'list',
                 name: 'mainChoice',
                 message: 'What would you like to do?',
-                choices:['View All Employees', 'Add Employee', 'Update Employee Role', 'Add Role', 'View All Departments', 'Add Department'],
+                choices:['View All Employees', 'Add Employee', 'Update Employee Role','View All Roles', 'Add Role', 'View All Departments', 'Add Department'],
              }
         ]).then (function(data) {
             switch(data.mainChoice) {
@@ -44,6 +44,9 @@ function mainChoice() {
                     break;
                 case "Update Employee Role":
                     updateEmployeeRole();
+                    break;
+                case "View All Roles":
+                    viewAllRoles();
                     break;
                 case "Add Role":
                     addRole();
@@ -58,7 +61,7 @@ function mainChoice() {
         });
 };
 
-// View all Employees CHOICE
+// View all Employees CHOICE //Needs Job Title, Department, Salary, Manager
 function viewAllEmployees() {
     db.query('SELECT * FROM employee', function (err, results)
     {
@@ -68,7 +71,7 @@ function viewAllEmployees() {
     });
 };
 
-// Add Employee CHOICE
+// Add Employee CHOICE //Needs Role, Manager
 function addEmployee() {
     db.query("SELECT * FROM role", function(err, results){
         if(err) throw err;
@@ -189,6 +192,16 @@ function updateEmployeeRole() {
             }) 
     }); 
 }
+
+// View all Roles CHOICE
+function viewAllRoles() {
+    db.query('SELECT * FROM role', function (err, results)
+    {
+        if(err) throw err;
+        console.table(results);
+        mainChoice(); 
+    });
+};
 
 
 // Add Role CHOICE
