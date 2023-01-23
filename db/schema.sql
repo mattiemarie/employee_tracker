@@ -21,7 +21,7 @@ CREATE TABLE role (
     department_id INT,
     FOREIGN KEY (department_id)
     REFERENCES department(department_id)
-    ON DELETE SET NULL
+    ON DELETE SET NULL  
 );
 
 CREATE TABLE department (
