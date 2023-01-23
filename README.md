@@ -59,11 +59,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 The following is a link to an uploaded demo of the Challenge 12 SQL: Employee Tracker
 
-
-
-
-
-
+https://drive.google.com/file/d/16hRllwqT1ketpb__KM4R34Tfx_FUr0SM/view
 
 
 ## Description
